@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind Css</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<style>
+    .mainDiv {
+        background: #fff;
+    }
+
+    :root {
+        --out-shad: 3px 3px 3px #bebebe,
+            -3px -3px 3px #ffffff;
+    }
+
+    .innerShadd {
+        background: #e0e0e0;
+        box-shadow: 3px 3px 3px #bebebe,
+            -3px -3px 3px #ffffff;
+    }
+
+    .outShadd {
+        background: #e0e0e0;
+        box-shadow: inset 3px 3px 3px #bebebe,
+            inset -3px -3px 3px #ffffff;
+    }
+
+  
+
+
+    .row {
+        margin-top: 30px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+
+    }
+
+    .button {
+        background: #19ACFF;
+        box-shadow: -9px 13px 23px 0px rgba(0, 163, 255, 0.65), -3px 4px 11px 0px #B0DFFF inset;
+        color: #fff;
+    }
+
+    .darkBtn {
+        background: #19ACFF;
+        box-shadow: -9px 13px 23px 0px rgba(0, 163, 255, 0.65), -3px 4px 11px 0px #B0DFFF inset;
+        border-radius: 10px;
+    }
+
+    .wrapper {
+        background: #e0e0e0;
+    }
+
+    body.dark {
+        .innerShadd {
+            background: #1e1e1e;
+            box-shadow: 3px 3px 3px #1a1a1a,
+                -3px -3px 3px #232323;
+        }
+
+        .mainDiv {
+            background: #000;
+        }
+
+        .outShadd {
+            background: #1e1e1e;
+            box-shadow: inset 3px 3px 3px #1a1a1a,
+                inset -3px -3px 3px #232323;
+        }
+
+        .wrapper {
+            background: #1e1e1e;
+        }
+
+        :root {
+            --out-shad: 3px 3px 3px #1a1a1a,
+                -3px -3px 3px #232323;
+        }
+    }
+
+      button {
+        width: 60px;
+        height: 40px;
+        box-shadow: var(--out-shad);
+        border-radius: 10px;
+        font-size: 18px;
+        margin: 0 auto;
+        margin-top: 15px;
+        color: #000;
+
+    }
+</style>
+
+<body>
+   
+    <div class="mainDiv w-full h-screen flex justify-center items-center">
+        <div class="wrapper  w-full lg:w-96 h-full lg:h-5/6 p-5 rounded-md">
+            <div class="displ w-full h-40 outShadd rounded-md relative ">
+                <input readonly id="display" type="text" value="Shamimer Calculator 😒"
+                    class="bg-[#e0e0e0] absolute bottom-0 right-0 text-right p-5 pb-0 mb-2 text-2xl mr-5 text-[#424242] outline-none">
+            </div>
+            <div class="row">
+                <button onclick="appendToDisplay('*')">*</button>
+                <button onclick="singleClear()"><ion-icon name="close-outline"></ion-icon></button>
+                <button onclick="appendToDisplay('/')">/</button>
+                <button class="button" onclick="clearDisplay()">AC</button>
+                <button onclick="appendToDisplay('7')"> 7</button>
+                <button onclick="appendToDisplay('8')">8</button>
+                <button onclick="appendToDisplay('9')">9</button>
+                <button class="button" onclick="appendToDisplay('-')">-</button>
+                <button onclick="appendToDisplay('4')">4</button>
+                <button onclick="appendToDisplay('5')">5</button>
+                <button onclick="appendToDisplay('6')">6</button>
+                <button class="button" onclick="appendToDisplay('+')">+</button>
+                <button onclick="appendToDisplay('3')">3</button>
+                <button onclick="appendToDisplay('2')">2</button>
+                <button onclick="appendToDisplay('1')">1</button>
+                <button class="button" onclick="calculate()">=</button>
+                <button onclick="appendToDisplay('0')">0</button>
+                <button onclick="appendToDisplay('00')">00</button>
+                <button onclick="appendToDisplay('.')">.</button>
+                <button class="button">Rks</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+<script>
+    let display = document.getElementById('display');
+    let currentInput = '';
+
+    function appendToDisplay(value) {
+        currentInput += value;
+        display.value = currentInput;
+    }
+    function clearDisplay() {
+        currentInput = '';
+        display.value = '';
+    }
+    function singleClear() {
+        currentInput = display.value.slice(0, -1);
+        display.value = currentInput;
+    }
+
+    function calculate() {
+        try {
+            currentInput = eval(currentInput);
+            display.value = currentInput;
+        } catch (error) {
+            display.value = 'Error';
+        }
+    }
+    // darkbtn 
+    const darkBtn = document.querySelector(".darkBtn");
+    darkBtn.onclick = () => {
+        document.querySelector("body").classList.toggle("dark");
+    }
+</script>
+
+</html>
